@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FourthDimensions - Interior, Construction & Property Consultancy</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Main Navigation -->
+    <header class="main-header">
+        <div class="top-nav">
+            <div class="container">
+                <div class="logo">
+                    <a href="#">
+                        <span class="logo-first">Fourth</span><span class="logo-second">Dimensions</span>
+                    </a>
+                </div>
+                <nav class="main-nav">
+                    <a href="#interior" class="nav-link active">Interior</a>
+                    <a href="#construction" class="nav-link">Constructions</a>
+                    <a href="#consultancy" class="nav-link">Property Consultancy</a>
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </nav>
+            </div>
+        </div>
+        <div class="sub-nav">
+            <div class="container">
+                <a href="#residential" class="sub-nav-link">Residential</a>
+                <a href="#commercial" class="sub-nav-link">Commercial</a>
+                <a href="#industrial" class="sub-nav-link">Industrial</a>
+                <a href="#renovation" class="sub-nav-link">Renovation</a>
+                <a href="#design" class="sub-nav-link">Design</a>
+                <a href="#consultation" class="sub-nav-link">Consultation</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section with Background Video -->
+    <section class="hero">
+        <div class="video-background">
+            <video autoplay muted loop playsinline id="backgroundVideo">
+                <source src="static/video.mp4" type="video/mp4">
+                <!-- Fallback for browsers that don't support video -->
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-overlay"></div>
+        </div>
+        
+        <div class="hero-content">
+            <h1>Welcome to <span class="highlight">FourthDimensions</span></h1>
+            <p>Transforming spaces into extraordinary experiences</p>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section id="contact-form" class="contact-form-section">
+        <div class="container">
+            <div class="contact-form-container">
+                <div class="contact-header">
+                    <h2>Talk to Our Experts</h2>
+                    <span class="consultation-text">Schedule Your Free Consultation</span>
+                </div>
+                <form id="contactForm" class="contact-form">
+                    <div class="form-row">
+                        <input type="text" id="name" name="name" placeholder="Name*" required>
+                        <input type="email" id="email" name="email" placeholder="Email*" required>
+                        <input type="tel" id="phone" name="phone" placeholder="Phone*" required>
+                        <input type="text" id="requirements" name="requirements" placeholder="Requirements*" required>
+                        <div class="captcha-container">
+                            <input type="text" id="captcha" name="captcha" placeholder="Enter Captcha" required>
+                            <div class="captcha-image">7GJW</div>
+                            <button type="button" class="refresh-captcha"><i class="fas fa-sync-alt"></i></button>
+                        </div>
+                        <button type="submit" class="submit-button">Submit</button>
+                    </div>
+                </form>
+                <p class="privacy-note">We respect your privacy. <a href="#">Read our Policy.</a></p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Partners Section -->
+    <section class="partners-section">
+        <div class="container">
+            <h2 class="section-title">OUR PARTNERS</h2>
+        </div>
+        <div class="partners-slider">
+            <div class="slider-track">
+                <!-- First set of logos -->
+                <div class="partner-logo">
+                    <img src="static/logo/asian-paints-logo.png" alt="Asian Paints">
+                </div>
+                <div class="partner-logo">
+                    <img src="static/logo/Godrej-Logo.png" alt="Godrej">
+                </div>
+                <div class="partner-logo">
+                    <img src="static/logo/Havvells.png" alt="Havells">
+                </div>
+                <div class="partner-logo">
+                    <img src="static/logo/jaquar.jpeg" alt="Jaquar">
+                </div>
+                <div class="partner-logo">
+                    <img src="static/logo/Johnson-Titles.jpg" alt="Johnson Titles">
+                </div>
+                <div class="partner-logo">
+                    <img src="static/logo/jsw.png" alt="JSW">
+                </div>
+                <div class="partner-logo">
+                    <img src="static/logo/Legrand.gif" alt="Legrand">
+                </div>
+                <div class="partner-logo">
+                    <img src="static/logo/Ramco.png" alt="Ramco">
+                </div>
+                <div class="partner-logo">
+                    <img src="static/logo/Tata-Steel-320x156.jpg" alt="Tata Steel">
+                </div>
+                <div class="partner-logo">
+                    <img src="static/logo/ultratech-cement.png" alt="Ultratech Cement">
+                </div>
+                <div class="partner-logo">
+                    <img src="static/logo/acc-cement.png" alt="ACC Cement">
+                </div>
+                
+                <!-- Duplicate logos for continuous scrolling effect -->
+                <div class="partner-logo">
+                    <img src="static/logo/asian-paints-logo.png" alt="Asian Paints">
+                </div>
+                <div class="partner-logo">
+                    <img src="static/logo/Godrej-Logo.png" alt="Godrej">
+                </div>
+                <div class="partner-logo">
+                    <img src="static/logo/Havvells.png" alt="Havells">
+                </div>
+                <div class="partner-logo">
+                    <img src="static/logo/jaquar.jpeg" alt="Jaquar">
+                </div>
+                <div class="partner-logo">
+                    <img src="static/logo/Johnson-Titles.jpg" alt="Johnson Titles">
+                </div>
+                <div class="partner-logo">
+                    <img src="static/logo/jsw.png" alt="JSW">
+                </div>
+                <div class="partner-logo">
+                    <img src="static/logo/Legrand.gif" alt="Legrand">
+                </div>
+                <div class="partner-logo">
+                    <img src="static/logo/Ramco.png" alt="Ramco">
+                </div>
+                <div class="partner-logo">
+                    <img src="static/logo/Tata-Steel-320x156.jpg" alt="Tata Steel">
+                </div>
+                <div class="partner-logo">
+                    <img src="static/logo/ultratech-cement.png" alt="Ultratech Cement">
+                </div>
+                <div class="partner-logo">
+                    <img src="static/logo/acc-cement.png" alt="ACC Cement">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Us Section -->
+     
+    <section class="why-us-section">
+        <div class="container full-width">
+            <h2 class="section-title">WHY CHOOSE US?</h2>
+            
+            <div class="interior-layout">
+                <div class="interior-main-content">
+                    <div class="interior-description">
+                        <h3>Powerful features of <span class="logo-first">Fourth</span><span class="logo-second">Dimensions</span></h3>
+                        <p>At FourthDimensions, we pride ourselves on delivering exceptional quality and service across our range of offerings. Our team of experts is dedicated to bringing your vision to life with precision, creativity, and attention to detail.</p>
+            </div>
+            
+                    <div class="interior-right-panel">
+                <div class="features-list">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-couch"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Interior Design</h4>
+                            <p>Transform your spaces with our expert interior design services that blend aesthetics with functionality.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-hard-hat"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Construction Services</h4>
+                            <p>From concept to completion, our construction team delivers quality builds with precision and expertise.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Property Consultancy</h4>
+                            <p>Make informed property decisions with our expert consultancy services tailored to your needs.</p>
+                        </div>
+                    </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="interior-process">
+                    <h4>our showcase</h4>
+                    <div class="showcase-slider">
+                        <div class="showcase-container">
+                            <div class="showcase-track">
+                                <div class="showcase-slide">
+                                    <div class="showcase-item">
+                                        <img src="static/interior-main.jpg" alt="Interior Design Showcase">
+                                        <div class="showcase-caption">
+                                            <h5>Modern Living Room</h5>
+                                            <p>Contemporary design with elegant furnishings</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="showcase-slide">
+                                    <div class="showcase-item">
+                                        <img src="static/commercial-main.jpg" alt="Commercial Design Showcase">
+                                        <div class="showcase-caption">
+                                            <h5>Office Space</h5>
+                                            <p>Functional and stylish workspace design</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="showcase-slide">
+                                    <div class="showcase-item">
+                                        <img src="static/hospitality-main.jpg" alt="Hospitality Design Showcase">
+                                        <div class="showcase-caption">
+                                            <h5>Hotel Lobby</h5>
+                                            <p>Luxurious and welcoming entrance area</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="slider-controls">
+                                <button class="prev-slide"><i class="fas fa-chevron-left"></i></button>
+                                <div class="slider-dots">
+                                    <span class="dot active" data-slide="0"></span>
+                                    <span class="dot" data-slide="1"></span>
+                                    <span class="dot" data-slide="2"></span>
+                                </div>
+                                <button class="next-slide"><i class="fas fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="why-us-image">
+                    <div class="image-container primary-image">
+                        <img src="static/why-us-image.jpg" alt="Professional at work">
+                    </div>
+                    <div class="image-container secondary-image">
+                        <img src="static/why-us-image2.jpg" alt="Interior design showcase">
+                    </div>
+                    <div class="image-swap-hint">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                </div>
+            </div>
+            
+                <div class="interior-why-us">
+                    <h4>our achievements</h4>
+            <div class="stats-container">
+                <div class="stat-item">
+                    <h3>4586</h3>
+                    <p>Projects completed</p>
+                </div>
+                <div class="stat-item">
+                    <h3>8583</h3>
+                    <p>Sq. ft. designed</p>
+                </div>
+                <div class="stat-item">
+                    <h3>9548</h3>
+                    <p>Properties consulted</p>
+                </div>
+                <div class="stat-item">
+                    <h3>1236</h3>
+                    <p>Happy clients</p>
+                        </div>
+                    </div>
+                    
+                    <div class="cta-buttons">
+                        <a href="#interior" class="btn-explore">Explore more <i class="fas fa-arrow-right"></i></a>
+                        <a href="#contact-form" class="btn-quote">Get a quote <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Services Section -->
+    <section class="services-section">
+        <h2 class="section-title">OUR SERVICES</h2>
+        
+        <div class="service-filters">
+            <button class="service-filter active" data-filter="interior">Interior</button>
+            <button class="service-filter" data-filter="property">Property Consultancy</button>
+            <button class="service-filter" data-filter="construction">Constructions</button>
+        </div>
+        
+        <main class="content-area">
+            <section id="interior" class="content-section">
+                <div class="container full-width">
+                    <h2 class="section-title">Interior</h2>
+                    
+                <div class="interior-layout">
+                    <div class="interior-main-content">
+                        <div class="interior-description">
+                            <p>At FourthDimensions, we transform spaces into extraordinary experiences through our comprehensive interior design services. Our expert team combines creativity with functionality to deliver personalized solutions that reflect your unique style and needs.</p>
+                            <p>Whether you're looking to revamp a single room or redesign an entire property, our attention to detail and commitment to quality ensures exceptional results every time.</p>
+                        </div>
+                        
+                        <div class="interior-right-panel">
+                            <div class="interior-categories">
+                                    <h4>categories</h4>
+                                <ul class="category-list">
+                                    <li class="category-item active" data-category="residential">
+                                        <span>Residential Interiors</span>
+                                    </li>
+                                    <li class="category-item" data-category="commercial">
+                                        <span>Commercial Spaces</span>
+                                    </li>
+                                    <li class="category-item" data-category="hospitality">
+                                        <span>Hospitality Design</span>
+                                    </li>
+                                    <li class="category-item" data-category="office">
+                                        <span>Office Interiors</span>
+                                    </li>
+                                    <li class="category-item" data-category="retail">
+                                        <span>Retail Spaces</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div class="interior-showcase">
+                                <!-- Residential Gallery -->
+                                <div class="category-gallery active" data-gallery="residential">
+                                    <div class="showcase-main">
+                                        <img src="static/interior-main.jpg" alt="Residential Interior Design">
+                                    </div>
+                                    <div class="showcase-thumbnails">
+                                        <div class="thumbnail"><img src="static/interior-thumb1.jpg" alt="Residential Sample 1"></div>
+                                        <div class="thumbnail"><img src="static/interior-thumb2.jpg" alt="Residential Sample 2"></div>
+                                        <div class="thumbnail"><img src="static/interior-thumb3.jpg" alt="Residential Sample 3"></div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Commercial Gallery -->
+                                <div class="category-gallery" data-gallery="commercial">
+                                    <div class="showcase-main">
+                                        <img src="static/commercial-main.jpg" alt="Commercial Interior Design">
+                                    </div>
+                                    <div class="showcase-thumbnails">
+                                        <div class="thumbnail"><img src="static/commercial-thumb1.jpg" alt="Commercial Sample 1"></div>
+                                        <div class="thumbnail"><img src="static/commercial-thumb2.jpg" alt="Commercial Sample 2"></div>
+                                        <div class="thumbnail"><img src="static/commercial-thumb3.jpg" alt="Commercial Sample 3"></div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Hospitality Gallery -->
+                                <div class="category-gallery" data-gallery="hospitality">
+                                    <div class="showcase-main">
+                                        <img src="static/hospitality-main.jpg" alt="Hospitality Interior Design">
+                                    </div>
+                                    <div class="showcase-thumbnails">
+                                        <div class="thumbnail"><img src="static/hospitality-thumb1.jpg" alt="Hospitality Sample 1"></div>
+                                        <div class="thumbnail"><img src="static/hospitality-thumb2.jpg" alt="Hospitality Sample 2"></div>
+                                        <div class="thumbnail"><img src="static/hospitality-thumb3.jpg" alt="Hospitality Sample 3"></div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Office Gallery -->
+                                <div class="category-gallery" data-gallery="office">
+                                    <div class="showcase-main">
+                                        <img src="static/office-main.jpg" alt="Office Interior Design">
+                                    </div>
+                                    <div class="showcase-thumbnails">
+                                        <div class="thumbnail"><img src="static/office-thumb1.jpg" alt="Office Sample 1"></div>
+                                        <div class="thumbnail"><img src="static/office-thumb2.jpg" alt="Office Sample 2"></div>
+                                        <div class="thumbnail"><img src="static/office-thumb3.jpg" alt="Office Sample 3"></div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Retail Gallery -->
+                                <div class="category-gallery" data-gallery="retail">
+                                    <div class="showcase-main">
+                                        <img src="static/retail-main.jpg" alt="Retail Interior Design">
+                                    </div>
+                                    <div class="showcase-thumbnails">
+                                        <div class="thumbnail"><img src="static/retail-thumb1.jpg" alt="Retail Sample 1"></div>
+                                        <div class="thumbnail"><img src="static/retail-thumb2.jpg" alt="Retail Sample 2"></div>
+                                        <div class="thumbnail"><img src="static/retail-thumb3.jpg" alt="Retail Sample 3"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="interior-process">
+                            <h4>our process</h4>
+                        <div class="process-flow">
+                            <div class="process-step">
+                                <div class="step-circle">1</div>
+                                <p>Consultation</p>
+                            </div>
+                            <div class="process-connector"></div>
+                            <div class="process-step">
+                                <div class="step-circle">2</div>
+                                <p>Design Concept</p>
+                            </div>
+                            <div class="process-connector"></div>
+                            <div class="process-step">
+                                <div class="step-circle">3</div>
+                                <p>Planning</p>
+                            </div>
+                            <div class="process-connector"></div>
+                            <div class="process-step">
+                                <div class="step-circle">4</div>
+                                <p>Execution</p>
+                            </div>
+                            <div class="process-connector"></div>
+                            <div class="process-step">
+                                <div class="step-circle">5</div>
+                                <p>Delivery</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="interior-why-us">
+                            <h4>why us on interior?</h4>
+                        <div class="why-us-boxes">
+                            <div class="why-us-box">
+                                <i class="fas fa-paint-brush"></i>
+                                <h5>Creative Excellence</h5>
+                                <p>Innovative designs that stand out</p>
+                            </div>
+                            <div class="why-us-box">
+                                <i class="fas fa-ruler-combined"></i>
+                                <h5>Precision Planning</h5>
+                                <p>Meticulous attention to every detail</p>
+                            </div>
+                            <div class="why-us-box">
+                                <i class="fas fa-gem"></i>
+                                <h5>Quality Materials</h5>
+                                <p>Premium products for lasting results</p>
+                            </div>
+                            <div class="why-us-box">
+                                <i class="fas fa-clock"></i>
+                                <h5>Timely Delivery</h5>
+                                <p>Projects completed on schedule</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </section>
+            <section id="construction" class="content-section" style="display:none;">
+                <div class="container full-width">
+                    <h2 class="section-title">Construction Services</h2>
+                    
+                    <div class="interior-layout">
+                        <div class="interior-main-content">
+                            <div class="interior-description">
+                                <p>At FourthDimensions, we bring your construction dreams to life with precision and expertise. Our team of skilled professionals handles projects of all sizes, from residential builds to commercial complexes, ensuring quality at every step.</p>
+                                <p>With a focus on timely delivery and attention to detail, we manage the entire construction process from foundation to finishing touches, creating spaces that are both functional and aesthetically pleasing.</p>
+            </div>
+            
+                            <div class="interior-right-panel">
+                                <div class="interior-categories">
+                                    <h4>categories</h4>
+                                    <ul class="category-list">
+                                        <li class="category-item active" data-category="residential-construction">
+                                            <span>Residential Construction</span>
+                                        </li>
+                                        <li class="category-item" data-category="commercial-construction">
+                                            <span>Commercial Buildings</span>
+                                        </li>
+                                        <li class="category-item" data-category="renovation">
+                                            <span>Renovation Projects</span>
+                                        </li>
+                                        <li class="category-item" data-category="industrial">
+                                            <span>Industrial Structures</span>
+                                        </li>
+                                        <li class="category-item" data-category="infrastructure">
+                                            <span>Infrastructure Development</span>
+                                        </li>
+                    </ul>
+                                </div>
+                                
+                                <div class="interior-showcase">
+                                    <!-- Construction Gallery -->
+                                    <div class="category-gallery active" data-gallery="residential-construction">
+                                        <div class="showcase-main">
+                                            <img src="static/construction-service.jpg" alt="Residential Construction">
+                                        </div>
+                                        <div class="showcase-thumbnails">
+                                            <div class="thumbnail"><img src="static/interior-thumb1.jpg" alt="Construction Sample 1"></div>
+                                            <div class="thumbnail"><img src="static/interior-thumb2.jpg" alt="Construction Sample 2"></div>
+                                            <div class="thumbnail"><img src="static/interior-thumb3.jpg" alt="Construction Sample 3"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="interior-process">
+                            <h4>our showcase</h4>
+                            <div class="showcase-slider">
+                                <div class="showcase-container">
+                                    <div class="showcase-track">
+                                        <div class="showcase-slide">
+                                            <div class="showcase-item">
+                                                <img src="static/construction-service.jpg" alt="Construction Showcase">
+                                                <div class="showcase-caption">
+                                                    <h5>Residential Project</h5>
+                                                    <p>Modern home construction with premium materials</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="showcase-slide">
+                                            <div class="showcase-item">
+                                                <img src="static/commercial-main.jpg" alt="Commercial Construction">
+                                                <div class="showcase-caption">
+                                                    <h5>Office Building</h5>
+                                                    <p>Contemporary commercial construction project</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="showcase-slide">
+                                            <div class="showcase-item">
+                                                <img src="static/interior-main.jpg" alt="Renovation Project">
+                                                <div class="showcase-caption">
+                                                    <h5>Renovation Work</h5>
+                                                    <p>Complete transformation of existing structures</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="slider-controls">
+                                        <button class="prev-slide"><i class="fas fa-chevron-left"></i></button>
+                                        <div class="slider-dots">
+                                            <span class="dot active" data-slide="0"></span>
+                                            <span class="dot" data-slide="1"></span>
+                                            <span class="dot" data-slide="2"></span>
+                                        </div>
+                                        <button class="next-slide"><i class="fas fa-chevron-right"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="interior-why-us">
+                            <h4>why us for construction?</h4>
+                            <div class="why-us-boxes">
+                                <div class="why-us-box">
+                                    <i class="fas fa-hard-hat"></i>
+                                    <h5>Expert Team</h5>
+                                    <p>Skilled professionals with years of experience</p>
+                                </div>
+                                <div class="why-us-box">
+                                    <i class="fas fa-tools"></i>
+                                    <h5>Quality Materials</h5>
+                                    <p>Only the best materials for lasting structures</p>
+                                </div>
+                                <div class="why-us-box">
+                                    <i class="fas fa-calendar-check"></i>
+                                    <h5>On-Time Delivery</h5>
+                                    <p>Projects completed within agreed timeframes</p>
+                                </div>
+                                <div class="why-us-box">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <h5>Safety Standards</h5>
+                                    <p>Strict adherence to safety protocols</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="consultancy" class="content-section" style="display:none;">
+                <div class="container full-width">
+                    <h2 class="section-title">Property Consultancy</h2>
+                    
+                    <div class="interior-layout">
+                        <div class="interior-main-content">
+                            <div class="interior-description">
+                                <p>Our property consultancy services provide expert guidance to help you make informed decisions about your real estate investments. Whether you're buying, selling, or investing, our team offers comprehensive market analysis and personalized advice.</p>
+                                <p>With deep knowledge of the local and national property markets, we help you navigate complex transactions, maximize returns, and minimize risks in all your property dealings.</p>
+                            </div>
+                            
+                            <div class="interior-right-panel">
+                                <div class="interior-categories">
+                                    <h4>categories</h4>
+                                    <ul class="category-list">
+                                        <li class="category-item active" data-category="property-valuation">
+                                            <span>Property Valuation</span>
+                                        </li>
+                                        <li class="category-item" data-category="investment-advisory">
+                                            <span>Investment Advisory</span>
+                                        </li>
+                                        <li class="category-item" data-category="legal-documentation">
+                                            <span>Legal Documentation</span>
+                                        </li>
+                                        <li class="category-item" data-category="market-analysis">
+                                            <span>Market Analysis</span>
+                                        </li>
+                                        <li class="category-item" data-category="property-management">
+                                            <span>Property Management</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="interior-showcase">
+                                    <!-- Consultancy Gallery -->
+                                    <div class="category-gallery active" data-gallery="property-valuation">
+                                        <div class="showcase-main">
+                                            <img src="static/property-service.jpg" alt="Property Consultancy">
+                                        </div>
+                                        <div class="showcase-thumbnails">
+                                            <div class="thumbnail"><img src="static/interior-thumb1.jpg" alt="Consultancy Sample 1"></div>
+                                            <div class="thumbnail"><img src="static/interior-thumb2.jpg" alt="Consultancy Sample 2"></div>
+                                            <div class="thumbnail"><img src="static/interior-thumb3.jpg" alt="Consultancy Sample 3"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="interior-process">
+                            <h4>our process</h4>
+                            <div class="process-flow">
+                                <div class="process-step">
+                                    <div class="step-circle">1</div>
+                                    <p>Consultation</p>
+                                </div>
+                                <div class="process-connector"></div>
+                                <div class="process-step">
+                                    <div class="step-circle">2</div>
+                                    <p>Analysis</p>
+                                </div>
+                                <div class="process-connector"></div>
+                                <div class="process-step">
+                                    <div class="step-circle">3</div>
+                                    <p>Strategy</p>
+                                </div>
+                                <div class="process-connector"></div>
+                                <div class="process-step">
+                                    <div class="step-circle">4</div>
+                                    <p>Implementation</p>
+                                </div>
+                                <div class="process-connector"></div>
+                                <div class="process-step">
+                                    <div class="step-circle">5</div>
+                                    <p>Review</p>
+                                </div>
+                </div>
+            </div>
+            
+                        <div class="interior-why-us">
+                            <h4>why us for consultancy?</h4>
+                            <div class="why-us-boxes">
+                                <div class="why-us-box">
+                                    <i class="fas fa-chart-line"></i>
+                                    <h5>Market Expertise</h5>
+                                    <p>In-depth knowledge of property markets</p>
+                                </div>
+                                <div class="why-us-box">
+                                    <i class="fas fa-handshake"></i>
+                                    <h5>Trusted Advisors</h5>
+                                    <p>Transparent and ethical consultation</p>
+                                </div>
+                                <div class="why-us-box">
+                                    <i class="fas fa-file-contract"></i>
+                                    <h5>Legal Support</h5>
+                                    <p>Comprehensive documentation assistance</p>
+                                </div>
+                                <div class="why-us-box">
+                                    <i class="fas fa-search-dollar"></i>
+                                    <h5>Value Optimization</h5>
+                                    <p>Maximizing returns on your investments</p>
+                                </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        </section>
+    </main>
+    
+
+    <script src="script.js"></script>
+</body>
+</html> 
