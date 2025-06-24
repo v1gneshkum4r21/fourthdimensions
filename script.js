@@ -832,4 +832,24 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
-// --- END CONSTRUCTION GALLERY FUNCTIONALITY --- 
+// --- END CONSTRUCTION GALLERY FUNCTIONALITY ---
+
+document.addEventListener('DOMContentLoaded', function() {
+    var testimonialVideo = document.getElementById('testimonialVideo');
+    var testimonialPlayBtn = document.getElementById('testimonialPlayBtn');
+    if (testimonialVideo && testimonialPlayBtn) {
+        testimonialPlayBtn.addEventListener('click', function() {
+            testimonialVideo.play();
+            testimonialPlayBtn.style.display = 'none';
+        });
+        testimonialVideo.addEventListener('pause', function() {
+            testimonialPlayBtn.style.display = '';
+        });
+        testimonialVideo.addEventListener('ended', function() {
+            testimonialPlayBtn.style.display = '';
+        });
+        testimonialVideo.addEventListener('play', function() {
+            testimonialPlayBtn.style.display = 'none';
+        });
+    }
+}); 
