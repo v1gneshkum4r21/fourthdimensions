@@ -203,28 +203,34 @@ tabs.forEach(tab => {
 });
 
 // Video Modal Functionality
-playButton.addEventListener('click', () => {
-    videoModal.style.display = 'block';
-    document.body.style.overflow = 'hidden'; // Prevent background scrolling
-    
-    // Add entrance animation
-    const modalContent = videoModal.querySelector('.modal-content');
-    modalContent.style.animation = 'modalSlideIn 0.3s ease-out';
-});
+if (playButton) {
+    playButton.addEventListener('click', () => {
+        videoModal.style.display = 'block';
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        
+        // Add entrance animation
+        const modalContent = videoModal.querySelector('.modal-content');
+        modalContent.style.animation = 'modalSlideIn 0.3s ease-out';
+    });
+}
 
 // Close modal when clicking the close button
-closeButton.addEventListener('click', () => {
-    videoModal.style.display = 'none';
-    document.body.style.overflow = 'auto'; // Restore scrolling
-});
+if (closeButton) {
+    closeButton.addEventListener('click', () => {
+        videoModal.style.display = 'none';
+        document.body.style.overflow = 'auto'; // Restore scrolling
+    });
+}
 
 // Close modal when clicking outside the modal content
-videoModal.addEventListener('click', (e) => {
-    if (e.target === videoModal) {
-        videoModal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
-});
+if (videoModal) {
+    videoModal.addEventListener('click', (e) => {
+        if (e.target === videoModal) {
+            videoModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    });
+}
 
 // Close modal with Escape key
 document.addEventListener('keydown', (e) => {
@@ -503,171 +509,82 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Interior Category and Thumbnail Gallery
+// --- BEGIN UNIVERSAL GALLERY FUNCTIONALITY ---
 document.addEventListener('DOMContentLoaded', function() {
-    console.log("DOM loaded - checking for category items and galleries");
-    
-    // Category switching functionality
-    const categoryItems = document.querySelectorAll('.category-item');
-    const categoryGalleries = document.querySelectorAll('.category-gallery');
-    
-    console.log("Found category items:", categoryItems.length);
-    console.log("Found category galleries:", categoryGalleries.length);
-    
-    if (categoryItems.length > 0) {
+    // Helper to initialize gallery logic for a given section
+    function initGallery(sectionSelector) {
+        const section = document.querySelector(sectionSelector);
+        if (!section || section.style.display === 'none') return;
+        const categoryItems = section.querySelectorAll('.category-item');
+        const categoryGalleries = section.querySelectorAll('.category-gallery');
         categoryItems.forEach(item => {
             item.addEventListener('click', function() {
-                // Get the category value
                 const categoryValue = this.getAttribute('data-category');
-                console.log("Category clicked:", categoryValue);
-                
-                // Update active state for category items
                 categoryItems.forEach(cat => cat.classList.remove('active'));
                 this.classList.add('active');
-                
-                // Hide all galleries with fade-out effect
                 categoryGalleries.forEach(gallery => {
                     gallery.style.opacity = '0';
                     setTimeout(() => {
                         gallery.classList.remove('active');
                     }, 300);
                 });
-                
-                // Show the selected gallery with fade-in effect
-                const targetGallery = document.querySelector(`.category-gallery[data-gallery="${categoryValue}"]`);
-                console.log("Target gallery found:", targetGallery ? true : false);
-                
+                const targetGallery = section.querySelector(`.category-gallery[data-gallery="${categoryValue}"]`);
                 if (targetGallery) {
                     setTimeout(() => {
                         targetGallery.classList.add('active');
                         setTimeout(() => {
                             targetGallery.style.opacity = '1';
+                            const thumbs = targetGallery.querySelectorAll('.thumbnail');
+                            thumbs.forEach(t => t.classList.remove('active-thumb'));
+                            if (thumbs[0]) thumbs[0].classList.add('active-thumb');
                         }, 50);
                     }, 350);
                 }
             });
         });
-    }
-    
-    // Thumbnail gallery functionality for all category galleries
-    const allThumbnails = document.querySelectorAll('.thumbnail');
-    console.log("Found thumbnails:", allThumbnails.length);
-    
-    if (allThumbnails.length > 0) {
+        const allThumbnails = section.querySelectorAll('.thumbnail');
         allThumbnails.forEach(thumbnail => {
             thumbnail.addEventListener('click', function() {
-                console.log("Thumbnail clicked");
-                
-                // Find the parent gallery
                 const parentGallery = this.closest('.category-gallery');
-                if (!parentGallery) {
-                    console.log("No parent gallery found");
-                    return;
-                }
-                
-                // Get the main image in this gallery
+                if (!parentGallery) return;
                 const mainImage = parentGallery.querySelector('.showcase-main img');
-                if (!mainImage) {
-                    console.log("No main image found");
-                    return;
-                }
-                
-                console.log("Found main image:", mainImage.src);
-                
-                // Get the clicked thumbnail's image source
+                if (!mainImage) return;
                 const newImageSrc = this.querySelector('img').getAttribute('src');
                 const currentMainSrc = mainImage.getAttribute('src');
-                
-                console.log("Swapping images:", currentMainSrc, "with", newImageSrc);
-                
-                // Add fade-out effect to main image
                 mainImage.style.opacity = '0';
-                
-                // After fade out, swap the images and fade in
                 setTimeout(() => {
-                    // Swap the images
                     mainImage.setAttribute('src', newImageSrc);
                     this.querySelector('img').setAttribute('src', currentMainSrc);
-                    
-                    // Fade in the new main image
                     mainImage.style.opacity = '1';
                 }, 300);
-                
-                // Add active class to clicked thumbnail within this gallery
                 const galleryThumbnails = parentGallery.querySelectorAll('.thumbnail');
                 galleryThumbnails.forEach(t => t.classList.remove('active-thumb'));
                 this.classList.add('active-thumb');
             });
         });
     }
-});
-
-// Add direct click handlers to category items
-document.addEventListener('DOMContentLoaded', function() {
-    // Direct click handlers for category items
-    document.querySelectorAll('.category-item').forEach(item => {
-        item.onclick = function() {
-            const categoryValue = this.getAttribute('data-category');
-            console.log("Direct click on category:", categoryValue);
-            
-            // Update active states
-            document.querySelectorAll('.category-item').forEach(cat => cat.classList.remove('active'));
-            this.classList.add('active');
-            
-            // Hide all galleries
-            document.querySelectorAll('.category-gallery').forEach(gallery => {
-                gallery.style.opacity = '0';
-                setTimeout(() => {
-                    gallery.classList.remove('active');
-                }, 300);
-            });
-            
-            // Show selected gallery
-            const targetGallery = document.querySelector(`.category-gallery[data-gallery="${categoryValue}"]`);
-            if (targetGallery) {
-                setTimeout(() => {
-                    targetGallery.classList.add('active');
-                    setTimeout(() => {
-                        targetGallery.style.opacity = '1';
-                    }, 50);
-                }, 350);
-            }
-        };
-    });
-    
-    // Direct click handlers for thumbnails
-    document.querySelectorAll('.thumbnail').forEach(thumb => {
-        thumb.onclick = function() {
-            const parentGallery = this.closest('.category-gallery');
-            if (!parentGallery) return;
-            
-            const mainImage = parentGallery.querySelector('.showcase-main img');
-            if (!mainImage) return;
-            
-            const thumbImg = this.querySelector('img');
-            const newImageSrc = thumbImg.getAttribute('src');
-            const currentMainSrc = mainImage.getAttribute('src');
-            
-            console.log("Direct thumbnail click - swapping images");
-            
-            // Fade out
-            mainImage.style.opacity = '0';
-            
-            // Swap images
+    // Initialize for the visible section on load
+    const visibleSection = document.querySelector('.content-section[style*="display: block"]') || document.querySelector('.content-section:not([style*="display: none"])');
+    if (visibleSection) {
+        if (visibleSection.id === 'interior') initGallery('#interior .interior-layout');
+        if (visibleSection.id === 'construction') initGallery('#construction .interior-layout');
+        if (visibleSection.id === 'consultancy') initGallery('#consultancy .interior-layout');
+    }
+    // Re-initialize gallery logic when switching tabs
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function() {
             setTimeout(() => {
-                mainImage.setAttribute('src', newImageSrc);
-                thumbImg.setAttribute('src', currentMainSrc);
-                
-                // Fade in
-                mainImage.style.opacity = '1';
-            }, 300);
-            
-            // Update active state
-            parentGallery.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active-thumb'));
-            this.classList.add('active-thumb');
-        };
+                const activeSection = document.querySelector('.content-section[style*="display: block"]') || document.querySelector('.content-section:not([style*="display: none"])');
+                if (activeSection) {
+                    if (activeSection.id === 'interior') initGallery('#interior .interior-layout');
+                    if (activeSection.id === 'construction') initGallery('#construction .interior-layout');
+                    if (activeSection.id === 'consultancy') initGallery('#consultancy .interior-layout');
+                }
+            }, 400); // Wait for section to be shown
+        });
     });
 });
+// --- END UNIVERSAL GALLERY FUNCTIONALITY ---
 
 // Features Slider Functionality
 document.addEventListener('DOMContentLoaded', function() {
@@ -845,4 +762,74 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     }
-}); 
+});
+
+// --- BEGIN CONSTRUCTION GALLERY FUNCTIONALITY ---
+document.addEventListener('DOMContentLoaded', function() {
+    // Only run if the construction section is present
+    const constructionSection = document.querySelector('#construction .interior-layout');
+    if (!constructionSection) return;
+
+    // Category switching functionality
+    const categoryItems = constructionSection.querySelectorAll('.category-item');
+    const categoryGalleries = constructionSection.querySelectorAll('.category-gallery');
+
+    categoryItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const categoryValue = this.getAttribute('data-category');
+            // Update active state for category items
+            categoryItems.forEach(cat => cat.classList.remove('active'));
+            this.classList.add('active');
+            // Hide all galleries with fade-out effect
+            categoryGalleries.forEach(gallery => {
+                gallery.style.opacity = '0';
+                setTimeout(() => {
+                    gallery.classList.remove('active');
+                }, 300);
+            });
+            // Show the selected gallery with fade-in effect
+            const targetGallery = constructionSection.querySelector(`.category-gallery[data-gallery="${categoryValue}"]`);
+            if (targetGallery) {
+                setTimeout(() => {
+                    targetGallery.classList.add('active');
+                    setTimeout(() => {
+                        targetGallery.style.opacity = '1';
+                        // Set the first thumbnail as active-thumb
+                        const thumbs = targetGallery.querySelectorAll('.thumbnail');
+                        thumbs.forEach(t => t.classList.remove('active-thumb'));
+                        if (thumbs[0]) thumbs[0].classList.add('active-thumb');
+                    }, 50);
+                }, 350);
+            }
+        });
+    });
+
+    // Thumbnail gallery functionality for all category galleries
+    const allThumbnails = constructionSection.querySelectorAll('.thumbnail');
+    allThumbnails.forEach(thumbnail => {
+        thumbnail.addEventListener('click', function() {
+            // Find the parent gallery
+            const parentGallery = this.closest('.category-gallery');
+            if (!parentGallery) return;
+            // Get the main image in this gallery
+            const mainImage = parentGallery.querySelector('.showcase-main img');
+            if (!mainImage) return;
+            // Get the clicked thumbnail's image source
+            const newImageSrc = this.querySelector('img').getAttribute('src');
+            const currentMainSrc = mainImage.getAttribute('src');
+            // Add fade-out effect to main image
+            mainImage.style.opacity = '0';
+            // After fade out, swap the images and fade in
+            setTimeout(() => {
+                mainImage.setAttribute('src', newImageSrc);
+                this.querySelector('img').setAttribute('src', currentMainSrc);
+                mainImage.style.opacity = '1';
+            }, 300);
+            // Add active class to clicked thumbnail within this gallery
+            const galleryThumbnails = parentGallery.querySelectorAll('.thumbnail');
+            galleryThumbnails.forEach(t => t.classList.remove('active-thumb'));
+            this.classList.add('active-thumb');
+        });
+    });
+});
+// --- END CONSTRUCTION GALLERY FUNCTIONALITY --- 
