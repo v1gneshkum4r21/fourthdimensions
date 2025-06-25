@@ -562,6 +562,7 @@ body {
     height: 400px;
     width: 100%;
     margin: 20px 0;
+    overflow: visible; /* Ensure swapped images are not clipped */
 }
 
 .why-us-section .stats-container {
@@ -620,7 +621,7 @@ body {
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-    transition: all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    /* transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1); */
 }
 
 .primary-image {
@@ -628,8 +629,10 @@ body {
     height: 340px;
     top: 0;
     right: 0;
+    left: auto;
+    bottom: auto;
     z-index: 2;
-    animation: float-primary 8s infinite alternate;
+    /* animation: float-primary 8s infinite alternate; */
 }
 
 .secondary-image {
@@ -637,42 +640,22 @@ body {
     height: 280px;
     bottom: 0;
     left: 0;
+    right: auto;
+    top: auto;
     z-index: 1;
     border: 10px solid white;
-    animation: float-secondary 8s infinite alternate;
+    /* animation: float-secondary 8s infinite alternate; */
 }
 
-@keyframes float-primary {
-    0% {
-        transform: translateY(0) translateX(0);
-    }
-    50% {
-        transform: translateY(30px) translateX(-40px);
-        z-index: 1;
-    }
-    100% {
-        transform: translateY(0) translateX(0);
-    }
-}
-
-@keyframes float-secondary {
-    0% {
-        transform: translateY(0) translateX(0);
-    }
-    50% {
-        transform: translateY(-50px) translateX(40px);
-        z-index: 2;
-    }
-    100% {
-        transform: translateY(0) translateX(0);
-    }
-}
+/* Removed keyframes for float-primary and float-secondary */
 
 .image-container img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.7s ease;
+    /* Remove transform on hover for image swap images */
+    transition: none;
+    pointer-events: none;
 }
 
 .image-swap-hint {
