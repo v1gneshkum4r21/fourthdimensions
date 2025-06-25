@@ -1,0 +1,305 @@
+{% extends 'admin/base.html' %}
+
+{% block head_css %}
+    {{ super() }}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+        }
+        
+        .navbar-brand {
+            font-weight: 600;
+            font-size: 1.5rem;
+            padding: 15px;
+        }
+        
+        .navbar-default {
+            background-color: #343a40;
+            border-color: #343a40;
+        }
+        
+        .navbar-default .navbar-brand,
+        .navbar-default .navbar-nav > li > a {
+            color: #ffffff;
+        }
+        
+        .navbar-default .navbar-brand:hover,
+        .navbar-default .navbar-nav > li > a:hover {
+            color: #f8f9fa;
+        }
+        
+        .navbar-default .navbar-nav > .active > a, 
+        .navbar-default .navbar-nav > .active > a:hover, 
+        .navbar-default .navbar-nav > .active > a:focus {
+            background-color: #495057;
+            color: #ffffff;
+        }
+        
+        .panel {
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,.1);
+        }
+        
+        .panel-default > .panel-heading {
+            background-color: #f8f9fa;
+            border-color: #e9ecef;
+            padding: 15px;
+        }
+        
+        /* Updated button styles */
+        .btn-primary {
+            background-color: #4361ee;
+            border-color: #3a56e4;
+        }
+        
+        .btn-primary:hover {
+            background-color: #3a56e4;
+            border-color: #2a46d4;
+        }
+        
+        .btn-default {
+            background-color: #4f5d75;
+            border-color: #404b5f;
+            color: #fff;
+        }
+        
+        .btn-default:hover {
+            background-color: #404b5f;
+            border-color: #333d4d;
+            color: #fff;
+        }
+        
+        .btn-success {
+            background-color: #38b000;
+            border-color: #2d9000;
+        }
+        
+        .btn-success:hover {
+            background-color: #2d9000;
+            border-color: #227000;
+        }
+        
+        .btn-info {
+            background-color: #4cc9f0;
+            border-color: #34bfe9;
+        }
+        
+        .btn-info:hover {
+            background-color: #34bfe9;
+            border-color: #25b0da;
+        }
+        
+        .btn-warning {
+            background-color: #ff9e00;
+            border-color: #e08e00;
+        }
+        
+        .btn-warning:hover {
+            background-color: #e08e00;
+            border-color: #c07700;
+        }
+        
+        .btn-danger {
+            background-color: #ef476f;
+            border-color: #e93060;
+        }
+        
+        .btn-danger:hover {
+            background-color: #e93060;
+            border-color: #d62753;
+        }
+        
+        /* Panel colors */
+        .panel-primary {
+            border-color: #4361ee;
+        }
+        
+        .panel-primary > .panel-heading {
+            background-color: #4361ee;
+            border-color: #3a56e4;
+        }
+        
+        .panel-success {
+            border-color: #38b000;
+        }
+        
+        .panel-success > .panel-heading {
+            background-color: #38b000;
+            border-color: #2d9000;
+        }
+        
+        .panel-info {
+            border-color: #4cc9f0;
+        }
+        
+        .panel-info > .panel-heading {
+            background-color: #4cc9f0;
+            border-color: #34bfe9;
+        }
+        
+        .panel-warning {
+            border-color: #ff9e00;
+        }
+        
+        .panel-warning > .panel-heading {
+            background-color: #ff9e00;
+            border-color: #e08e00;
+        }
+        
+        .panel-danger {
+            border-color: #ef476f;
+        }
+        
+        .panel-danger > .panel-heading {
+            background-color: #ef476f;
+            border-color: #e93060;
+        }
+        
+        .form-control {
+            padding: 8px 12px;
+            height: auto;
+        }
+        
+        .list-group-item {
+            padding: 12px 15px;
+        }
+        
+        .nav-tabs {
+            margin-bottom: 20px;
+        }
+        
+        .nav-tabs > li > a {
+            padding: 10px 15px;
+        }
+        
+        .table > thead > tr > th {
+            background-color: #f8f9fa;
+            border-bottom: 2px solid #dee2e6;
+        }
+        
+        .table-striped > tbody > tr:nth-of-type(odd) {
+            background-color: #f9fafb;
+        }
+        
+        .pagination > li > a {
+            color: #4361ee;
+        }
+        
+        .pagination > .active > a {
+            background-color: #4361ee;
+            border-color: #3a56e4;
+        }
+        
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        
+        .dropdown-menu {
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .admin-form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,.1);
+        }
+        
+        /* Improve mobile responsiveness */
+        @media (max-width: 768px) {
+            .navbar-nav {
+                margin: 0;
+            }
+            
+            .navbar-default .navbar-collapse {
+                border-color: #343a40;
+            }
+            
+            .navbar-default .navbar-toggle {
+                border-color: #ffffff;
+            }
+            
+            .navbar-default .navbar-toggle .icon-bar {
+                background-color: #ffffff;
+            }
+            
+            .navbar-default .navbar-toggle:hover,
+            .navbar-default .navbar-toggle:focus {
+                background-color: #495057;
+            }
+        }
+    </style>
+{% endblock %}
+
+{% block page_body %}
+<div class="container">
+    <nav class="navbar navbar-default" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#admin-navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            {% block brand %}
+            <a class="navbar-brand" href="{{ admin_view.admin.url }}">{{ admin_view.admin.name }}</a>
+            {% endblock %}
+        </div>
+        <!-- navbar content -->
+        <div class="collapse navbar-collapse" id="admin-navbar-collapse">
+            {% block main_menu %}
+            <ul class="nav navbar-nav">
+                {{ layout.menu() }}
+            </ul>
+            {% endblock %}
+
+            {% block menu_links %}
+            <ul class="nav navbar-nav navbar-right">
+                {{ layout.menu_links() }}
+                {% if current_user.is_authenticated %}
+                <li>
+                    <a href="{{ url_for('admin.logout') }}">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+            {% endblock %}
+        </div>
+    </nav>
+
+    {% block messages %}
+    {{ layout.messages() }}
+    {% endblock %}
+
+    {# store the jinja2 context for form_rules #}
+    {% set render_ctx = h.resolve_ctx() %}
+
+    {% block body %}{% endblock %}
+</div>
+{% endblock %}
+
+{% block tail_js %}
+{{ super() }}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Add icons to menu items
+        $('.nav-header').prepend('<i class="fas fa-folder-open mr-2"></i> ');
+        
+        // Improve dropdown menus
+        $('.dropdown-toggle').dropdown();
+        
+        // Add animation to alerts
+        $('.alert').fadeIn('slow');
+        
+        // Make tables responsive
+        $('.table').addClass('table-responsive');
+    });
+</script>
+{% endblock %} 

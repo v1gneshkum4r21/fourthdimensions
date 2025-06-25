@@ -1,0 +1,178 @@
+{% extends 'admin/model/create.html' %}
+
+{% block body %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fas fa-image"></i> Create New Image</h3>
+    </div>
+    <div class="panel-body">
+        <form action="" method="POST" enctype="multipart/form-data" class="admin-form">
+            {% if form.hidden_tag is defined %}
+                {{ form.hidden_tag() }}
+            {% else %}
+                {% if csrf_token %}
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                {% endif %}
+            {% endif %}
+            
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category if category != 'error' else 'danger' }}">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <i class="fas fa-{{ 'info-circle' if category == 'info' else ('check-circle' if category == 'success' else 'exclamation-triangle') }}"></i> {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- Title Field -->
+                    <div class="form-group">
+                        <label for="{{ form.title.id }}">
+                            <i class="fas fa-heading"></i> 
+                            {{ form.title.label.text }}
+                            {% if form.title.flags.required %}<span class="required">*</span>{% endif %}
+                        </label>
+                        {{ form.title(class="form-control") }}
+                        {% if form.title.errors %}
+                            <ul class="errors list-unstyled">
+                                {% for error in form.title.errors %}
+                                    <li class="text-danger"><i class="fas fa-exclamation-circle"></i> {{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Description Field -->
+                    <div class="form-group">
+                        <label for="{{ form.description.id }}">
+                            <i class="fas fa-align-left"></i> 
+                            {{ form.description.label.text }}
+                            {% if form.description.flags.required %}<span class="required">*</span>{% endif %}
+                        </label>
+                        {{ form.description(class="form-control", rows=5) }}
+                        {% if form.description.errors %}
+                            <ul class="errors list-unstyled">
+                                {% for error in form.description.errors %}
+                                    <li class="text-danger"><i class="fas fa-exclamation-circle"></i> {{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Category Field (if available) -->
+                    {% if form.category is defined %}
+                    <div class="form-group">
+                        <label for="{{ form.category.id }}">
+                            <i class="fas fa-tags"></i> 
+                            {{ form.category.label.text }}
+                            {% if form.category.flags.required %}<span class="required">*</span>{% endif %}
+                        </label>
+                        {{ form.category(class="form-control select2") }}
+                        {% if form.category.errors %}
+                            <ul class="errors list-unstyled">
+                                {% for error in form.category.errors %}
+                                    <li class="text-danger"><i class="fas fa-exclamation-circle"></i> {{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                        
+                        {% if not form.category.choices or form.category.choices|length <= 1 %}
+                            <div class="alert alert-warning" style="margin-top: 10px;">
+                                <i class="fas fa-exclamation-triangle"></i> Please create at least one category before adding content.
+                                <a href="{{ url_for('categorymanagerview.index') }}" class="btn btn-xs btn-warning">
+                                    <i class="fas fa-plus"></i> Create Categories
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="image">
+                            <i class="fas fa-file-image"></i> Image File 
+                            <span class="required">*</span>
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fas fa-upload"></i></span>
+                            <input type="file" id="image" name="image" class="form-control" 
+                                accept="image/jpeg,image/png,image/gif,image/webp" required>
+                        </div>
+                        <p class="help-block"><i class="fas fa-info-circle"></i> Allowed formats: jpg, jpeg, png, gif, webp</p>
+                        <p class="help-block"><i class="fas fa-weight"></i> Maximum file size: 10MB</p>
+                        
+                        {% if admin_view.form_errors and admin_view.form_errors.get('image') %}
+                            <ul class="errors list-unstyled">
+                                {% for error in admin_view.form_errors.get('image') %}
+                                    <li class="text-danger"><i class="fas fa-exclamation-circle"></i> {{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                        
+                        <div id="image-preview" class="well well-sm" style="margin-top: 15px; display: none;">
+                            <h5><i class="fas fa-eye"></i> Image Preview</h5>
+                            <img id="preview-img" src="#" alt="Preview" style="max-width: 100%; max-height: 200px; border-radius: 4px;" class="img-responsive">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <hr>
+            
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Save
+                </button>
+                <a href="{{ return_url }}" class="btn btn-default">
+                    <i class="fas fa-times"></i> Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Image preview functionality
+    document.getElementById('image').addEventListener('change', function(e) {
+        var file = this.files[0];
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('preview-img').src = e.target.result;
+                document.getElementById('image-preview').style.display = 'block';
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+    
+    // Add form submit handler to validate file size
+    document.querySelector('form').addEventListener('submit', function(e) {
+        var imageInput = document.getElementById('image');
+        if (imageInput.files.length > 0) {
+            var fileSize = imageInput.files[0].size; // in bytes
+            var maxSize = 10 * 1024 * 1024; // 10MB
+            
+            if (fileSize > maxSize) {
+                e.preventDefault();
+                alert('File size exceeds the maximum allowed size (10MB).');
+                return false;
+            }
+        }
+    });
+    
+    // Initialize Select2 for category dropdown if it exists
+    if ($.fn.select2 && document.querySelector('.select2')) {
+        $('.select2').select2({
+            width: '100%',
+            placeholder: 'Select a category',
+            allowClear: true
+        });
+    }
+});
+</script>
+{% endblock %} 

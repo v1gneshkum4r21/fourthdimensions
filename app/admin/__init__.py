@@ -1,0 +1,1 @@
+from app.admin.views import MyAdminIndexView, register_admin_views 

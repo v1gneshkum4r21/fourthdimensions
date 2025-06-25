@@ -1,0 +1,56 @@
+{% extends 'admin/lib.html' %}
+
+{% block body %}
+<div class="form-group {{ 'has-error' if kwargs.get('errors') }}">
+    <label for="{{ field.id }}" class="control-label">
+        {{ field.label.text }}{% if field.flags.required %}<span class="required">*</span>{% endif %}
+    </label>
+    
+    <div class="input-group">
+        <span class="input-group-addon"><i class="fas fa-file-upload"></i></span>
+        {{ field(**kwargs) | safe }}
+    </div>
+    
+    {% if field.description %}
+    <p class="help-block">
+        <i class="fas fa-info-circle"></i> {{ field.description }}
+    </p>
+    {% endif %}
+    
+    {% if kwargs.get('errors') %}
+    <ul class="help-block errors">
+        {% for error in kwargs.get('errors') %}
+        <li><i class="fas fa-exclamation-triangle"></i> {{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    
+    {% if field.object_data %}
+    <div class="file-preview well well-sm" style="margin-top: 10px;">
+        <h5><i class="fas fa-file"></i> Current file: {{ field.object_data }}</h5>
+        {% if field.object_data.startswith('uploads/') %}
+            {% if field.object_data.endswith(('.jpg', '.jpeg', '.png', '.gif', '.webp')) %}
+                <div style="margin-top: 10px;">
+                    <img src="{{ url_for('static', filename=field.object_data.replace('\\', '/')) }}" 
+                         style="max-width: 300px; max-height: 200px; border-radius: 4px;" 
+                         class="img-responsive">
+                </div>
+            {% elif field.object_data.endswith(('.mp4', '.webm', '.ogg', '.mov')) %}
+                <div style="margin-top: 10px;">
+                    <video controls style="max-width: 300px; border-radius: 4px;">
+                        <source src="{{ url_for('static', filename=field.object_data.replace('\\', '/')) }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            {% endif %}
+            <div style="margin-top: 10px;">
+                <a href="{{ url_for('static', filename=field.object_data.replace('\\', '/')) }}" 
+                   target="_blank" class="btn btn-sm btn-info">
+                    <i class="fas fa-external-link-alt"></i> View file
+                </a>
+            </div>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %} 

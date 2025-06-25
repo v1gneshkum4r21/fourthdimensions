@@ -1,0 +1,129 @@
+{% extends 'admin/master.html' %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Category Manager</h1>
+            <p class="lead">Create and manage categories for different sections</p>
+            
+            <!-- Tabs for different sections -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><i class="fas fa-tags"></i> Categories</h3>
+                        </div>
+                        <div class="panel-body">
+                            <!-- Tab navigation -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                {% for section in categories.keys() %}
+                                <li role="presentation" {% if loop.first %}class="active"{% endif %}>
+                                    <a href="#{{ section }}" aria-controls="{{ section }}" role="tab" data-toggle="tab">
+                                        <i class="fas fa-{% if section == 'interior' %}home{% else %}tools{% endif %}"></i> {{ section|capitalize }}
+                                    </a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            
+                            <!-- Tab content -->
+                            <div class="tab-content" style="margin-top: 20px;">
+                                {% for section, section_categories in categories.items() %}
+                                <div role="tabpanel" class="tab-pane {% if loop.first %}active{% endif %}" id="{{ section }}">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="panel panel-primary">
+                                                <div class="panel-heading">
+                                                    <h3 class="panel-title"><i class="fas fa-plus-circle"></i> Create New Category</h3>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <form action="{{ url_for('.create_category', section=section, content_type='text') }}" method="POST" class="form-horizontal">
+                                                        <div class="form-group">
+                                                            <label for="category_name" class="col-sm-4 control-label">Category Name:</label>
+                                                            <div class="col-sm-8">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"><i class="fas fa-tag"></i></span>
+                                                                    <input type="text" class="form-control" id="category_name" name="category_name" placeholder="Enter category name" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-offset-4 col-sm-8">
+                                                                <button type="submit" class="btn btn-primary">
+                                                                    <i class="fas fa-plus"></i> Create Category
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                    <div class="help-block">
+                                                        <p><small><i class="fas fa-info-circle"></i> Categories will be automatically available for all content types in the {{ section|capitalize }} section.</small></p>
+                                                        <div class="alert alert-warning">
+                                                            <i class="fas fa-exclamation-triangle"></i> <strong>Important:</strong> You must create at least one category before adding content to the {{ section|capitalize }} section.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-6">
+                                            <div class="panel panel-info">
+                                                <div class="panel-heading">
+                                                    <h3 class="panel-title"><i class="fas fa-list"></i> Existing Categories</h3>
+                                                </div>
+                                                <div class="panel-body">
+                                                    {% if section_categories %}
+                                                    <div class="table-responsive">
+                                                        <table class="table table-striped table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th><i class="fas fa-tag"></i> Category</th>
+                                                                    <th><i class="fas fa-cogs"></i> Actions</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {% for value, label in section_categories %}
+                                                                <tr>
+                                                                    <td>{{ label }}</td>
+                                                                    <td>
+                                                                        <form action="{{ url_for('.delete_category', section=section, content_type='text', category=value) }}" method="POST" style="display:inline;">
+                                                                            <button type="submit" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure you want to delete this category? This will delete ALL content with this category!');">
+                                                                                <i class="fas fa-trash-alt"></i> Delete
+                                                                            </button>
+                                                                        </form>
+                                                                    </td>
+                                                                </tr>
+                                                                {% endfor %}
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    {% else %}
+                                                    <div class="alert alert-info">
+                                                        <i class="fas fa-info-circle"></i> No categories found. Create one using the form on the left.
+                                                    </div>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add jQuery AJAX setup to include X-Requested-With header -->
+<script>
+$(document).ready(function() {
+    $.ajaxSetup({
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+        }
+    });
+});
+</script>
+{% endblock %} 

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .media-item {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            width: 300px;
+        }
+        .media-item img {
+            max-width: 100%;
+            height: auto;
+        }
+        .media-item video {
+            max-width: 100%;
+            height: auto;
+        }
+        h2 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Media Examples</h1>
+
+    <h2>Images</h2>
+    <div class="container">
+        {% for image in images %}
+        <div class="media-item">
+            <h3>{{ image.title }}</h3>
+            <p>{{ image.description }}</p>
+            {% if image.image_path %}
+                <img src="{{ url_for('static', filename=image.image_path.replace('\\', '/')) }}" alt="{{ image.title }}">
+            {% else %}
+                <p>No image available</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <h2>Videos</h2>
+    <div class="container">
+        {% for video in videos %}
+        <div class="media-item">
+            <h3>{{ video.title }}</h3>
+            <p>{{ video.description }}</p>
+            {% if video.video_path %}
+                <video controls>
+                    <source src="{{ url_for('static', filename=video.video_path.replace('\\', '/')) }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            {% else %}
+                <p>No video available</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html> 

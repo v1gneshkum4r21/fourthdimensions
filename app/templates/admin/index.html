@@ -1,0 +1,132 @@
+{% extends 'admin/master.html' %}
+
+{% block body %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fas fa-tachometer-alt"></i> Dashboard</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="well well-sm">
+                            <h4><i class="fas fa-user"></i> Welcome, {{ current_user.username }}</h4>
+                            <p>Last login: {% if current_user.last_login %}{{ current_user.last_login.strftime('%Y-%m-%d %H:%M:%S') }}{% else %}Never{% endif %}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-8">
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i> Welcome to the Fourth Dimensions Admin Panel. Use the navigation menu to manage your content.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fas fa-image"></i> Images</h3>
+                            </div>
+                            <div class="panel-body text-center">
+                                <h3>{{ image_count }}</h3>
+                                <p>Total Images</p>
+                                <a href="{{ url_for('interiorgalleryimage.index_view') }}" class="btn btn-xs btn-info">Manage Images</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-3">
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fas fa-video"></i> Videos</h3>
+                            </div>
+                            <div class="panel-body text-center">
+                                <h3>{{ video_count }}</h3>
+                                <p>Total Videos</p>
+                                <a href="{{ url_for('herovideo.index_view') }}" class="btn btn-xs btn-success">Manage Videos</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-3">
+                        <div class="panel panel-warning">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fas fa-file-alt"></i> Text Content</h3>
+                            </div>
+                            <div class="panel-body text-center">
+                                <h3>{{ text_count }}</h3>
+                                <p>Text Items</p>
+                                <a href="{{ url_for('herotext.index_view') }}" class="btn btn-xs btn-warning">Manage Text</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-3">
+                        <div class="panel panel-danger">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fas fa-users"></i> Users</h3>
+                            </div>
+                            <div class="panel-body text-center">
+                                <h3>{{ user_count }}</h3>
+                                <p>Admin Users</p>
+                                <a href="{{ url_for('user.index_view') }}" class="btn btn-xs btn-danger">Manage Users</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fas fa-tasks"></i> Quick Actions</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="list-group">
+                                    <a href="{{ url_for('interiorvideo.create_view') }}" class="list-group-item">
+                                        <i class="fas fa-plus-circle"></i> Add New Video
+                                    </a>
+                                    <a href="{{ url_for('interiorgalleryimage.create_view') }}" class="list-group-item">
+                                        <i class="fas fa-plus-circle"></i> Add New Image
+                                    </a>
+                                    <a href="{{ url_for('herotext.create_view') }}" class="list-group-item">
+                                        <i class="fas fa-plus-circle"></i> Add New Text Content
+                                    </a>
+                                    <a href="{{ url_for('media_example') }}" class="list-group-item" target="_blank">
+                                        <i class="fas fa-external-link-alt"></i> View Media Example
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fas fa-clock"></i> Recent Activity</h3>
+                            </div>
+                            <div class="panel-body">
+                                {% if recent_items %}
+                                <ul class="list-group">
+                                    {% for item in recent_items %}
+                                    <li class="list-group-item">
+                                        <span class="badge">{{ item.created_at.strftime('%Y-%m-%d') }}</span>
+                                        <i class="fas fa-{{ 'image' if item.type == 'image' else ('video' if item.type == 'video' else 'file-alt') }}"></i>
+                                        {{ item.title }}
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                                {% else %}
+                                <p class="text-muted">No recent activity</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
