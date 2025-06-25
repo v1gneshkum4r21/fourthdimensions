@@ -411,41 +411,44 @@ document.addEventListener('DOMContentLoaded', function () {
 // Service Filters Functionality
 document.addEventListener('DOMContentLoaded', function() {
     const serviceFilters = document.querySelectorAll('.service-filter');
-    const serviceItems = document.querySelectorAll('.service-item');
-    
-    if (serviceFilters.length > 0) {
-        serviceFilters.forEach(filter => {
-            filter.addEventListener('click', function() {
-                // Remove active class from all filters
-                serviceFilters.forEach(f => f.classList.remove('active'));
-                
-                // Add active class to clicked filter
-                this.classList.add('active');
-                
-                // Get the filter value
-                const filterValue = this.getAttribute('data-filter');
-                
-                // Hide all service items with fade-out effect
-                serviceItems.forEach(item => {
-                    item.classList.remove('active');
-                    item.style.opacity = '0';
-                    item.style.transform = 'translateY(20px)';
-                });
-                
-                // Show the filtered service item with delay for animation
-                setTimeout(() => {
-                    serviceItems.forEach(item => {
-                        if (item.getAttribute('data-service') === filterValue) {
-                            item.classList.add('active');
-                            // Trigger reflow for animation
-                            void item.offsetWidth;
-                            item.style.opacity = '1';
-                            item.style.transform = 'translateY(0)';
-                        }
-                    });
-                }, 300);
-            });
+    const contentSections = document.querySelectorAll('.content-section');
+
+    // Map filter values to section IDs
+    const filterToSection = {
+        'interior': 'interior',
+        'construction': 'construction'
+    };
+
+    serviceFilters.forEach(filter => {
+        filter.addEventListener('click', function() {
+            // Remove active from all filters
+            serviceFilters.forEach(f => f.classList.remove('active'));
+            // Add active to clicked filter
+            this.classList.add('active');
+
+            // Hide all content sections
+            contentSections.forEach(section => section.style.display = 'none');
+
+            // Show the selected section
+            const filterValue = this.getAttribute('data-filter');
+            const sectionId = filterToSection[filterValue];
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.style.display = 'block';
+            }
         });
+    });
+
+    // On page load, show only the active section
+    const activeFilter = document.querySelector('.service-filter.active');
+    if (activeFilter) {
+        const filterValue = activeFilter.getAttribute('data-filter');
+        const sectionId = filterToSection[filterValue];
+        contentSections.forEach(section => section.style.display = 'none');
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) {
+            targetSection.style.display = 'block';
+        }
     }
 });
 
@@ -508,7 +511,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (visibleSection) {
         if (visibleSection.id === 'interior') initGallery('#interior .interior-layout');
         if (visibleSection.id === 'construction') initGallery('#construction .interior-layout');
-        if (visibleSection.id === 'consultancy') initGallery('#consultancy .interior-layout');
     }
     // Re-initialize gallery logic when switching tabs
     document.querySelectorAll('.nav-link').forEach(link => {
