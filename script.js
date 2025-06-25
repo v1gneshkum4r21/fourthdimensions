@@ -56,113 +56,53 @@ function initImageAnimations() {
     const secondaryImage = document.querySelector('.secondary-image');
     
     if (primaryImage && secondaryImage) {
-        // Add mouse movement parallax effect
-        document.querySelector('.why-us-section').addEventListener('mousemove', function(e) {
-            const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
-            const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
-            
-            primaryImage.style.transform = `translateX(${xAxis}px) translateY(${yAxis}px)`;
-            secondaryImage.style.transform = `translateX(${-xAxis}px) translateY(${-yAxis}px)`;
-        });
-        
-        // Reset transform when mouse leaves the section
-        document.querySelector('.why-us-section').addEventListener('mouseleave', function() {
-            primaryImage.style.transform = 'translateX(0) translateY(0)';
-            secondaryImage.style.transform = 'translateX(0) translateY(0)';
-        });
-        
-        // Add scroll-based animation
-        window.addEventListener('scroll', function() {
-            const whyUsSection = document.querySelector('.why-us-section');
-            const rect = whyUsSection.getBoundingClientRect();
-            const isInView = (
-                rect.top <= (window.innerHeight || document.documentElement.clientHeight) && 
-                rect.bottom >= 0
-            );
-            
-            if (isInView) {
-                const scrollPosition = window.scrollY;
-                const sectionTop = whyUsSection.offsetTop;
-                const scrollOffset = scrollPosition - sectionTop + window.innerHeight/2;
-                
-                if (scrollOffset > 0) {
-                    // Calculate parallax effect based on scroll position
-                    const moveY = scrollOffset * 0.05;
-                    
-                    // Apply different movements to each image
-                    if (primaryImage.style.animation !== 'none') {
-                        primaryImage.style.animation = 'none';
-                        secondaryImage.style.animation = 'none';
-                    }
-                    
-                    primaryImage.style.transform = `translateY(${-moveY}px) rotate(${moveY * 0.05}deg)`;
-                    secondaryImage.style.transform = `translateY(${moveY}px) rotate(${-moveY * 0.05}deg)`;
-                }
-            }
-        });
-        
-        // Add image swap functionality on click
         let imagesSwapped = false;
         const whyUsImage = document.querySelector('.why-us-image');
         
         if (whyUsImage) {
             whyUsImage.addEventListener('click', function() {
-                // Stop any existing animations
-                primaryImage.style.animation = 'none';
-                secondaryImage.style.animation = 'none';
-                
-                // Apply transition for smooth swap
                 primaryImage.style.transition = 'all 1s cubic-bezier(0.34, 1.56, 0.64, 1)';
                 secondaryImage.style.transition = 'all 1s cubic-bezier(0.34, 1.56, 0.64, 1)';
                 
                 if (!imagesSwapped) {
-                    // Save original classes to restore later
-                    primaryImage.dataset.originalClass = primaryImage.className;
-                    secondaryImage.dataset.originalClass = secondaryImage.className;
-                    
-                    // Swap positions and sizes
-                    primaryImage.style.transform = 'translateY(150px) translateX(-40px)';
-                    primaryImage.style.zIndex = '1';
-                    primaryImage.style.width = '55%';
-                    primaryImage.style.height = '280px';
-                    primaryImage.style.bottom = '0';
+                    // Swap all relevant properties to exactly exchange positions
                     primaryImage.style.top = 'auto';
+                    primaryImage.style.bottom = '0';
                     primaryImage.style.left = '0';
                     primaryImage.style.right = 'auto';
+                    primaryImage.style.width = '55%';
+                    primaryImage.style.height = '280px';
+                    primaryImage.style.zIndex = '1';
                     primaryImage.style.border = '10px solid white';
-                    
-                    secondaryImage.style.transform = 'translateY(-150px) translateX(40px)';
-                    secondaryImage.style.zIndex = '2';
-                    secondaryImage.style.width = '75%';
-                    secondaryImage.style.height = '340px';
+
                     secondaryImage.style.top = '0';
                     secondaryImage.style.bottom = 'auto';
-                    secondaryImage.style.right = '0';
                     secondaryImage.style.left = 'auto';
+                    secondaryImage.style.right = '0';
+                    secondaryImage.style.width = '75%';
+                    secondaryImage.style.height = '340px';
+                    secondaryImage.style.zIndex = '2';
                     secondaryImage.style.border = 'none';
                 } else {
-                    // Return to original positions and sizes
-                    primaryImage.style.transform = '';
-                    primaryImage.style.zIndex = '2';
-                    primaryImage.style.width = '75%';
-                    primaryImage.style.height = '340px';
+                    // Restore original positions
                     primaryImage.style.top = '0';
                     primaryImage.style.bottom = 'auto';
-                    primaryImage.style.right = '0';
                     primaryImage.style.left = 'auto';
+                    primaryImage.style.right = '0';
+                    primaryImage.style.width = '75%';
+                    primaryImage.style.height = '340px';
+                    primaryImage.style.zIndex = '2';
                     primaryImage.style.border = 'none';
-                    
-                    secondaryImage.style.transform = '';
-                    secondaryImage.style.zIndex = '1';
-                    secondaryImage.style.width = '55%';
-                    secondaryImage.style.height = '280px';
-                    secondaryImage.style.bottom = '0';
+
                     secondaryImage.style.top = 'auto';
+                    secondaryImage.style.bottom = '0';
                     secondaryImage.style.left = '0';
                     secondaryImage.style.right = 'auto';
+                    secondaryImage.style.width = '55%';
+                    secondaryImage.style.height = '280px';
+                    secondaryImage.style.zIndex = '1';
                     secondaryImage.style.border = '10px solid white';
                 }
-                
                 imagesSwapped = !imagesSwapped;
             });
         }
